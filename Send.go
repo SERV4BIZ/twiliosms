@@ -11,13 +11,13 @@ import (
 	"github.com/SERV4BIZ/gfp/jsons"
 )
 
-func (me *TWILIOSMS) Send(txtMessageSID string, txtToNumber string, txtMessage string) (string, error) {
+func (me *TWILIOSMS) Send(txtToNumber string, txtMessage string) (string, error) {
 	apiurl := "https://api.twilio.com/2010-04-01/Accounts/" + me.AccountSID + "/Messages.json"
 	method := "POST"
 
 	params := url.Values{}
 	params.Add("To", txtToNumber)
-	params.Add("MessagingServiceSid", txtMessageSID)
+	params.Add("MessagingServiceSid", me.MessageSID)
 	params.Add("Body", txtMessage)
 	payload := strings.NewReader(params.Encode())
 
