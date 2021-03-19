@@ -5,13 +5,14 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/SERV4BIZ/gfp/jsons"
 )
 
 func (me *TWILIOSMS) Send(txtMessageSID string, txtToNumber string, txtMessage string) (string, error) {
-	url := "https://api.twilio.com/2010-04-01/Accounts/" + me.AccountSID + "/Messages.json"
+	apiurl := "https://api.twilio.com/2010-04-01/Accounts/" + me.AccountSID + "/Messages.json"
 	method := "POST"
 
 	params := url.Values{}
@@ -21,7 +22,7 @@ func (me *TWILIOSMS) Send(txtMessageSID string, txtToNumber string, txtMessage s
 	payload := strings.NewReader(params.Encode())
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, payload)
+	req, err := http.NewRequest(method, apiurl, payload)
 
 	if err != nil {
 		return "", err
