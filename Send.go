@@ -11,6 +11,7 @@ import (
 	"github.com/SERV4BIZ/gfp/jsons"
 )
 
+// Send sms to number phone
 func (me *TWILIOSMS) Send(txtToNumber string, txtMessage string) (string, error) {
 	apiurl := "https://api.twilio.com/2010-04-01/Accounts/" + me.AccountSID + "/Messages.json"
 	method := "POST"
